@@ -16,5 +16,8 @@ sub catch_error : Private {
     my $error = pop(@errors);
     $c->res->body("Error: '$error'");
 }
+
+sub end : Private {}
+
 no Moose;
 1;
