@@ -4,7 +4,7 @@ use Moose::Role;
 
 requires qw/ end catch_error /;
 
-# ABSTRACT: easy custom error handling in your controller.
+# ABSTRACT: custom error handling in your controller.
 
 =head1 SYNOPSIS
     package MyApp::Controller::Root;
