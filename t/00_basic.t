@@ -18,7 +18,8 @@ use Test::Fatal;
     use Moose;
     BEGIN { extends 'Catalyst::Controller' }
     with 'CatalystX::CatchError';
-    sub end : Private { }
+    sub end : Private           { }
+    sub catch_error_foo : Private { }
     no Moose;
     1;
 }
@@ -28,6 +29,16 @@ use Test::Fatal;
         exception { my $ctl = FailController->new( app => {} ); },
         qr/^method\ 'catch_error'\ not\ found\.\ at/,
         "controller died saying that 'catch_error' method wasn't found.",
+    );
+    is(
+        exception { my $ctl = FailController->new( catch_error_method => 'catch_error_foo', app => {} ); },
+        undef,
+        "controller construction did not die.",
+    );
+    like(
+        exception { my $ctl = FailController->new( catch_error_method => 'catch_error_bar', app => {} ); },
+        qr/^method\ 'catch_error_bar'\ not\ found\.\ at/,
+        "controller died saying that 'catch_error_bar' method wasn't found.",
     );
 }
 
