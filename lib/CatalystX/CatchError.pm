@@ -19,16 +19,19 @@ requires qw/ end /;
 
 =cut
 
+sub BUILD {
+    my $self = shift;
+
+    if ( !$self->can('catch_error') ) {
+        die "method 'catch_error' not found.";
+    }
+}
+
 before 'end' => sub {
     my ( $self, $c ) = @_;
     if ( $c->has_errors ) {
-        if ( $self->can('catch_error') ) {
-            $c->forward( $self->action_for('catch_error'), [ @{ $c->error } ] );
-            $c->clear_errors;
-        }
-        else {
-            die "method 'catch_error' not found.";
-        }
+        $c->forward( $self->action_for('catch_error'), [ @{ $c->error } ] );
+        $c->clear_errors;
     }
 };
 
