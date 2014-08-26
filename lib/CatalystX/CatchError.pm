@@ -36,8 +36,9 @@ sub BUILD {
 before 'end' => sub {
     my ( $self, $c ) = @_;
     if ( $c->has_errors ) {
-        $c->forward( $self->action_for($self->catch_error_method), [ @{ $c->error } ] );
+        my @errors = @{ $c->error };
         $c->clear_errors;
+        $c->forward( $self->action_for($self->catch_error_method), \@errors );
     }
 };
 
