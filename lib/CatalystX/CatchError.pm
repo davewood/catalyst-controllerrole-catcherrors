@@ -34,13 +34,14 @@ has 'catch_error_method' => (
     default => 'catch_error',
 );
 
-sub BUILD {
+sub BUILD { }
+after BUILD => sub {
     my $self = shift;
 
     if ( !$self->can($self->catch_error_method) ) {
         die "method '" . $self->catch_error_method . "' not found.";
     }
-}
+};
 
 before 'end' => sub {
     my ( $self, $c ) = @_;
