@@ -7,8 +7,8 @@ with 'CatalystX::CatchError';
 sub index : Path Args(0) {
     my ( $self, $c ) = @_;
     $c->res->body("index");
-    $c->error('foobarbaz');
-    $c->error('foobarbaz2');
+    $c->error('error_msg_1');
+    $c->error('error_msg_2');
 }
 
 sub catch_error : Private {

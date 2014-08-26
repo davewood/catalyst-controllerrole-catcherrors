@@ -9,7 +9,7 @@ use Test::Fatal;
 
 {
     my $res = request('/');
-    is( $res->content, "Error:\ 'foobarbaz'", 'error has been caught.' );
+    is( $res->content, "Error:\ 'error_msg'", 'error has been caught.' );
 }
 
 {
@@ -18,8 +18,8 @@ use Test::Fatal;
         my $c = shift;
         my @errors = @{ $c->error };
         is( scalar @errors, 2, 'there should be two error in $c->error' );
-        is( $errors[0], "Rethrowing\ 'foobarbaz'", '1st error has been rethrown.' );
-        is( $errors[1], "Rethrowing\ 'foobarbaz2'", '2nd error has been rethrown.' );
+        is( $errors[0], "Rethrowing\ 'error_msg_1'", '1st error has been rethrown.' );
+        is( $errors[1], "Rethrowing\ 'error_msg_2'", '2nd error has been rethrown.' );
     };
     my $res = request('/fail/');
 }

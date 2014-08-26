@@ -8,7 +8,7 @@ __PACKAGE__->config( namespace => '' );
 sub index : Path Args(0) {
     my ( $self, $c ) = @_;
     $c->res->body("index");
-    $c->error('foobarbaz');
+    $c->error('error_msg');
 }
 
 sub catch_error : Private {
