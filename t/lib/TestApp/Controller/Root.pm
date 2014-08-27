@@ -14,14 +14,12 @@ sub index : Path Args(0) {
 
 sub rethrow : Local Args(0) {
     my ( $self, $c ) = @_;
-    $c->res->body("index");
     $c->error('rethrow_error_1');
     $c->error('rethrow_error_2');
 }
 
 sub http_exception : Local Args(0) {
     my ( $self, $c ) = @_;
-    $c->res->body("index");
     my $e = HTTP::Exception->new( 400, status_message => 'http_exception foobar' );
     $e->throw;
 }
