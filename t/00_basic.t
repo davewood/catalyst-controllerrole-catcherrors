@@ -50,7 +50,7 @@ use Test::Fatal;
     like(
         exception { my $ctl = FailController->new( catch_error_method => 'catch_error_bar', app => {} ); },
         qr/^method\ 'catch_error_bar'\ not\ found\.\ at/,
-        "controller died saying that 'catch_error_bar' method wasn't found.",
+        "controller died because the configured 'catch_error_method' wasn't found.",
     );
 }
 
