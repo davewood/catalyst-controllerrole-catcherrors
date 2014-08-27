@@ -2,7 +2,7 @@ package CatalystX::CatchError;
 
 use Moose::Role;
 
-requires qw/ end /;
+requires qw/ catch_errors end /;
 
 # ABSTRACT: custom error handling in your controller.
 
@@ -28,27 +28,12 @@ the original ones.
 
 =cut
 
-has 'catch_error_method' => (
-    is      => 'ro',
-    isa     => 'Str',
-    default => 'catch_error',
-);
-
-sub BUILD { }
-after BUILD => sub {
-    my $self = shift;
-
-    if ( !$self->can($self->catch_error_method) ) {
-        die "method '" . $self->catch_error_method . "' not found.";
-    }
-};
-
 before 'end' => sub {
     my ( $self, $c ) = @_;
     if ( $c->has_errors ) {
         my @errors = @{ $c->error };
         $c->clear_errors;
-        $c->forward( $self->action_for($self->catch_error_method), \@errors );
+        $c->forward( $self->action_for('catch_errors'), \@errors );
     }
 };
 

@@ -26,7 +26,7 @@ sub http_exception : Local Args(0) {
     $e->throw;
 }
 
-sub catch_error : Private {
+sub catch_errors : Private {
     my ( $self, $c, @errors ) = @_;
     for my $error (@errors) {
         if ( $error =~ qr/^rethrow_error_\d+$/xms ) {
