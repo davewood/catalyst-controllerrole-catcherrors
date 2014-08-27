@@ -7,17 +7,21 @@ use lib "$Bin/lib";
 use Catalyst::Test 'TestApp';
 use Test::Fatal;
 
+# action adds an error, catch_errors  handles it
 {
     my $res = request('/');
     is( $res->content, "Error:\ 'error'", 'error has been handled by catch_errors().' );
+    is( $res->code, 200, 'status 200' );
 }
 
+# action throws HTTP::Exception, should not reach catch_errors
 {
     my $res = request('/http_exception/');
     is( $res->code, 400, 'we do not break HTTP::Exception. (code)' );
     is( $res->content, "http_exception foobar", 'we do not break HTTP::Exception. (status_message)' );
 }
 
+# action adds 2 errors, catch_error rethrows them
 {
     no warnings 'redefine';
     local *Catalyst::finalize_error = sub {
@@ -30,7 +34,7 @@ use Test::Fatal;
     my $res = request('/rethrow/');
 }
 
-
+# block with controller without catch_errors method fails
 eval {
     package FailController;
     use Moose;
