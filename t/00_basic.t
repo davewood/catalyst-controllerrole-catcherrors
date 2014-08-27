@@ -13,6 +13,12 @@ use Test::Fatal;
 }
 
 {
+    my $res = request('/http_exception/');
+    is( $res->code, 400, 'we do not break HTTP::Exception. (code)' );
+    is( $res->content, "http_exception foobar", 'we do not break HTTP::Exception. (status_message)' );
+}
+
+{
     no warnings 'redefine';
     local *Catalyst::finalize_error = sub {
         my $c = shift;
