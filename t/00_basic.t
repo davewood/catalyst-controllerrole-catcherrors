@@ -39,14 +39,14 @@ eval {
     package FailController;
     use Moose;
     BEGIN { extends 'Catalyst::Controller' }
-    with 'CatalystX::CatchError';
+    with 'Catalyst::ControllerRole::CatchErrors';
     sub end : Private { }
     no Moose;
     1;
 };
 like(
     $@,
-    qr/CatalystX::CatchError'\ requires\ the\ method\ 'catch_errors'\ to\ be\ implemented\ by\ 'FailController'/xms,
+    qr/Catalyst::ControllerRole::CatchErrors'\ requires\ the\ method\ 'catch_errors'\ to\ be\ implemented\ by\ 'FailController'/xms,
     "found error msg (required method catch_errors not implemented).",
 );
 

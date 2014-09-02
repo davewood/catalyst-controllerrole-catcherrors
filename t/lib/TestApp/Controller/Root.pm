@@ -3,7 +3,7 @@ use Moose;
 use HTTP::Exception;
 
 BEGIN { extends 'Catalyst::Controller' }
-with 'CatalystX::CatchError';
+with 'Catalyst::ControllerRole::CatchErrors';
 __PACKAGE__->config( namespace => '' );
 
 sub index : Path Args(0) {
