@@ -19,6 +19,7 @@ requires qw/ catch_errors end /;
     }
 
 =head1 DESCRIPTION
+
 If an action throws an error the default behaviour of L<Catalyst|Catalyst::Runtime>
 is to render a default error page and set the response code to 500.
 One usecase where this is problematic is if you have a REST Controller using
