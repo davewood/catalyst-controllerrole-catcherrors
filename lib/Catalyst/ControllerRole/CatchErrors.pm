@@ -33,7 +33,7 @@ to your method and clears the original ones before calling C<catch_errors>.
 
 before 'end' => sub {
     my ( $self, $c ) = @_;
-    if ( $c->has_errors ) {
+    if ( scalar @{ $c->error } ) {
         my @errors = @{ $c->error };
         $c->clear_errors;
         $c->forward( $self->action_for('catch_errors'), \@errors );

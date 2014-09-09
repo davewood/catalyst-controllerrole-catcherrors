@@ -1,2 +1,6 @@
+0.02  2014-09-09
+    * fix POD syntax
+    * do not require recent Catalyst version
+
 0.01  2014-09-02
     * initial release
