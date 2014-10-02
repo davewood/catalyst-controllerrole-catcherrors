@@ -1,3 +1,6 @@
+0.03  2014-10-02
+    * add error cause to err msg in case of unknown err
+
 0.02  2014-09-09
     * fix POD syntax
     * do not require recent Catalyst version
