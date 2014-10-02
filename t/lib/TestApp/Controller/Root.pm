@@ -34,7 +34,7 @@ sub catch_errors : Private {
             $c->res->body("Error: '$error'");
         }
         else {
-            die "Unknown error";
+            die "Unknown error ($error)";
         }
     }
 }
