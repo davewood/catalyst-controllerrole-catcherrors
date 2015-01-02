@@ -30,6 +30,13 @@ during the request.
 You can rethrow the error in C<catch_errors>. C<Catalyst::ControllerRole::CatchErrors> passes a copy of the errors
 to your method and clears the original ones before calling C<catch_errors>.
 
+=head2 HTTP::Exception errors
+
+By default, C<Catalyst> does not catch errors confirming to the interface described by
+L<Plack::Middleware::HTTPExceptions> and lets the middleware deal with it.
+You can enable the C<always_catch_http_exceptions> in your C<Catalyst> configuration to
+let C<Catalyst::ControllerRole::CatchErrors> catch these errors as well.
+
 =cut
 
 before 'end' => sub {
