@@ -14,8 +14,11 @@ use Test::Fatal;
     is( $res->code, 200, 'status 200' );
 }
 
-# action throws HTTP::Exception, should not reach catch_errors
-{
+SKIP: {
+    skip('Special handling of HTTP::Exception errors not available if Catalyst < 5.90060', 2)
+        if $Catalyst::Runtime::VERSION < 5.90060;
+
+    # action throws HTTP::Exception, should not reach catch_errors
     my $res = request('/http_exception/');
     is( $res->code, 400, 'we do not break HTTP::Exception. (code)' );
     is( $res->content, "http_exception foobar", 'we do not break HTTP::Exception. (status_message)' );
