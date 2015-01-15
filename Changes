@@ -1,3 +1,6 @@
+0.05  2015-01-15
+    * skip HTTP-exception test if Catalyst version < 5.90062
+
 0.04  2015-01-02
     * skip HTTP-exception test if Catalyst version < 5.90060
 

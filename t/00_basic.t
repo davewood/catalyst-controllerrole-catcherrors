@@ -15,8 +15,8 @@ use Test::Fatal;
 }
 
 SKIP: {
-    skip('Special handling of HTTP::Exception errors not available if Catalyst < 5.90060', 2)
-        if $Catalyst::Runtime::VERSION < 5.90060;
+    skip('Special handling of HTTP::Exception errors not available if Catalyst < 5.90062', 2)
+        if $Catalyst::Runtime::VERSION < 5.90062;
 
     # action throws HTTP::Exception, should not reach catch_errors
     my $res = request('/http_exception/');
